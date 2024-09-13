@@ -3,7 +3,8 @@ const {
   getLocationsByCourt,
   putLocations,
   postLocations,
-  deleteLocations
+  deleteLocations,
+  getLocationByID
 } = require('../controllers/location')
 
 const locationsRouter = require('express').Router()
@@ -12,6 +13,7 @@ putLocations
 postLocations
 deleteLocations
 locationsRouter.get('/court/:Court', getLocationsByCourt)
+locationsRouter.get('/:id', getLocationByID)
 locationsRouter.get('/', getLocations)
 locationsRouter.put('/:id', putLocations)
 locationsRouter.post('/', postLocations)

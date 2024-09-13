@@ -3,6 +3,8 @@ const { connectMongo } = require('./src/config/db')
 const locationsRouter = require('./src/api/routes/location')
 const app = express()
 
+app.use(express.json())
+
 connectMongo()
 
 app.use('/api/v1/locations', locationsRouter)

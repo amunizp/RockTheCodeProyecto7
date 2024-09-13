@@ -27,7 +27,23 @@ const locationSchema = new mongoose.Schema(
         required: false
       }
     },
-    court: { type: String, enum: courts },
+    court: {
+      type: String,
+      enum: [
+        'Milton',
+        'Gray',
+        'Brooke',
+        'Marlowe',
+        'Spencer',
+        'Shelley',
+        'Pope',
+        'Byron',
+        'Coleridge',
+        'Herrick',
+        'Dryden',
+        'Tennyson'
+      ]
+    },
     courtNumber: {
       type: Number,
       validate: {
