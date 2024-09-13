@@ -6,10 +6,10 @@ const connectMongo = async () => {
   mongoose
     .connect(process.env.DB_URL)
     .then(() => {
-      console.log('connected with mongoDB')
+      console.log('connected with mongoDB ☺️')
     })
     .catch((err) => {
-      console.log('I could not connect to the mongoDB', err)
+      console.log('I could not connect to the mongoDB 🙃', err)
     })
 }
 

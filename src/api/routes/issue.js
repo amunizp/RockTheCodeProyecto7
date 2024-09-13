@@ -4,12 +4,12 @@ const {
   putIssues,
   postIssues,
   deleteIssues,
-  getIssueByUser
+  getIssueByReporter
 } = require('../controllers/issue')
 const issuesRouter = require('express').Router()
 
 issuesRouter.get('/:id', getIssueByID)
-issuesRouter.get('/user/:user', getIssueByUser)
+issuesRouter.get('/user/:user', getIssueByReporter)
 issuesRouter.get('/', getIssues)
 issuesRouter.put('/:id', putIssues)
 issuesRouter.post('/', postIssues)

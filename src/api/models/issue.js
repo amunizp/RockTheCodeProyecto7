@@ -6,7 +6,7 @@ const issueSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    user: { type: String, required: false },
+    reporter: { type: String, required: false },
     resolved: { type: Boolean, required: true }
   },
   {
