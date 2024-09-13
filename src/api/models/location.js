@@ -37,7 +37,7 @@ const locationSchema = new mongoose.Schema(
       }
     },
     image: { type: String },
-    issues: [{ type: String }]
+    issues: [{ type: mongoose.Types.ObjectId, ref: 'issues' }]
   },
   {
     timestamps: true,
