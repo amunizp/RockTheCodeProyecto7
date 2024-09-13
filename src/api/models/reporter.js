@@ -3,8 +3,7 @@ const bcrypt = require('bcrypt')
 const reporterSchema = new mongoose.Schema(
   {
     reporterName: { type: String, require: true },
-    telephone: { type: Number },
-    email: { type: String },
+    publicContact: { type: String },
     password: { type: String, required: true },
     admin: { type: Boolean, require: false, default: false }
   },

@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { default: mongoose } = require('mongoose')
 const connectMongo = async () => {
   //?estaría mal usar async redundante?

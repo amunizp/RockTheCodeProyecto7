@@ -1,3 +1,4 @@
+const { isAuth, isReporter } = require('../../middlewares/auth')
 const {
   getLocations,
   getLocationsByCourt,
@@ -9,11 +10,11 @@ const {
 
 const locationsRouter = require('express').Router()
 
-locationsRouter.get('/court/:court', getLocationsByCourt)
-locationsRouter.get('/:id', getLocationByID)
-locationsRouter.get('/', getLocations)
-locationsRouter.put('/:id', putLocations)
-locationsRouter.post('/', postLocations)
-locationsRouter.delete('/:id', deleteLocations)
+locationsRouter.get('/court/:court', [isReporter], getLocationsByCourt)
+locationsRouter.get('/:id', [isReporter], getLocationByID)
+locationsRouter.get('/', [isReporter], getLocations)
+locationsRouter.put('/:id', [isAuth], putLocations)
+locationsRouter.post('/', [isReporter], postLocations)
+locationsRouter.delete('/:id', [isAuth], deleteLocations)
 
 module.exports = locationsRouter

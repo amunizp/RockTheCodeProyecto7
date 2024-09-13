@@ -6,8 +6,7 @@ const loginReporter = async (req, res, next) => {
     const reporter = await Reporter.findOne({
       reporterName: req.body.reporterName
     })
-    console.log(req.body.reporterName)
-    console.log(reporter)
+
     if (reporter) {
       if (bcrypt.compareSync(req.body.password, reporter.password)) {
         //JSON web token
@@ -29,8 +28,6 @@ const loginReporter = async (req, res, next) => {
 
 async function getReporters(req, res, next) {
   try {
-    console.log(Reporter)
-
     const reporters = await Reporter.find()
 
     return res.status(200).json(reporters)
@@ -54,13 +51,15 @@ const getReporterByID = async (req, res, next) => {
 
 const registerReporters = async (req, res, next) => {
   try {
-    console.log('going to create a new reporter')
-    const newReporter = new Reporter(req.body)
-
+    const newReporter = new Reporter({
+      reporterName: req.body.reporterName,
+      publicContact: req.body.publicContact,
+      password: req.body.password
+    })
     const reporterDuplicated = await Reporter.findOne({
       reporterName: req.body.reporterName
     })
-    console.log(reporterDuplicated)
+
     if (reporterDuplicated) {
       return res.status(400).json('That name exists try a different name')
     }
