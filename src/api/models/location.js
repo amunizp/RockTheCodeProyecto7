@@ -27,25 +27,10 @@ const locationSchema = new mongoose.Schema(
         required: false
       }
     },
-    court: {
-      type: String,
-      enum: [
-        'Milton',
-        'Gray',
-        'Brooke',
-        'Marlowe',
-        'Spencer',
-        'Shelley',
-        'Pope',
-        'Byron',
-        'Coleridge',
-        'Herrick',
-        'Dryden',
-        'Tennyson'
-      ]
-    },
+    court: { type: String, required: false, enum: courts },
     courtNumber: {
       type: Number,
+      required: false,
       validate: {
         validator: (value) => value > 0 && value <= 18,
         message: 'Parkleys estate only has 18 max'
@@ -61,4 +46,4 @@ const locationSchema = new mongoose.Schema(
 )
 
 const Location = mongoose.model('locations', locationSchema, 'locations')
-module.exports = { Location }
+module.exports = { Location, courts }

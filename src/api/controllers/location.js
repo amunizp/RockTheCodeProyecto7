@@ -55,7 +55,7 @@ const putLocations = async (req, res, next) => {
     const locationUpdated = await Location.findByIdAndUpdate(id, newLocation, {
       new: true
     })
-    return res.status(202).json(locationUpdated)
+    return res.status(200).json(locationUpdated)
   } catch (error) {
     return res
       .status(400)
