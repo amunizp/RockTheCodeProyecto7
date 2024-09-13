@@ -73,10 +73,23 @@ const deleteIssues = async (req, res, next) => {
       .json({ message: 'error deleting issue', error: error.message })
   }
 }
+const getIssueByUser = async (req, res, next) => {
+  try {
+    const { user } = req.params
+    const issues = await Issue.find({ user: user })
+    return res.status(200).json(issues)
+  } catch (error) {
+    return res.status(400).json({
+      message: 'Error getting issues by user',
+      error: error.message
+    })
+  }
+}
 module.exports = {
   getIssues,
   getIssueByID,
   putIssues,
   postIssues,
-  deleteIssues
+  deleteIssues,
+  getIssueByUser
 }

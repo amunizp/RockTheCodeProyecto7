@@ -27,7 +27,7 @@ const getLocationByID = async (req, res, next) => {
 const getLocationsByCourt = async (req, res, next) => {
   try {
     const { court } = req.params
-    const locations = await Location.find({ court: court })
+    const locations = await Location.find({ court: court }).populate('issues')
     return res.status(200).json(locations)
   } catch (error) {
     return res.status(400).json({
