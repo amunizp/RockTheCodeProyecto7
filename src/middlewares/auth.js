@@ -1,5 +1,6 @@
 const { Reporter } = require('../api/models/reporter')
 const { verifySignature } = require('../config/jwt')
+const areYouYou = false
 
 const isAuth = async (req, res, next) => {
   try {
@@ -44,4 +45,40 @@ const isReporter = async (req, res, next) => {
     return res.status(400).json(error)
   }
 }
-module.exports = { isAuth, isReporter }
+
+const isSelf = async (req, res, next) => {
+  try {
+    console.log('checking if you are deleting yourself')
+    isReporter
+    console.log(isReporter)
+    console.log(isAuth)
+    console.log(
+      'looks like you are a reporter, now lets check if you are deleting yourself'
+    )
+    const token = req.headers.authorization
+    const parsedToken = token.split(' ').pop()
+    const { id } = verifySignature(parsedToken)
+    console.log('on the url', req.params.id)
+    console.log('from your token', id)
+
+    if (req.params.id === id) {
+      console.log('eres el mismo usuario')
+      next()
+    } else {
+      return res.status(400).json({
+        message:
+          'you are not authorised to do this because you can only delete yourself',
+        error: error.message
+      })
+    }
+  } catch (error) {
+    return res.status(400).json({
+      message:
+        'you are not authorised to do this because you can only delete yourself',
+      error: error.message
+    })
+  }
+}
+
+const authChain = [isSelf, isAuth]
+module.exports = { isAuth, isReporter, isSelf, authChain }

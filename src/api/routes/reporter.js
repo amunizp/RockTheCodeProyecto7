@@ -1,4 +1,9 @@
-const { isAuth, isReporter } = require('../../middlewares/auth')
+const {
+  isAuth,
+  isReporter,
+  isSelf,
+  authChain
+} = require('../../middlewares/auth')
 const {
   getReporterByID,
   getReporters,
@@ -14,6 +19,6 @@ reportersRouter.get('/', [isAuth], getReporters)
 reportersRouter.put('/:id', [isAuth], putReporters)
 reportersRouter.post('/register', registerReporters)
 reportersRouter.post('/login', loginReporter)
-reportersRouter.delete('/:id', [isAuth], deleteReporters)
+reportersRouter.delete('/:id', [authChain], deleteReporters)
 
 module.exports = reportersRouter
