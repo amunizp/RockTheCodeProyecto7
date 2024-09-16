@@ -27,4 +27,4 @@ mongoose
   .catch((err) => {
     console.log(`Error creating data: ${err}`)
   })
-  .finally(() => mongoose.disconnect)
+  .finally(() => mongoose.disconnect) // no parece que se desconecte
