@@ -10,7 +10,7 @@ const {
 const issuesRouter = require('express').Router()
 
 issuesRouter.get('/:id', [isReporter], getIssueByID)
-issuesRouter.get('/user/:user', [isReporter], getIssueByReporter)
+issuesRouter.get('/user/:reporter', [isReporter], getIssueByReporter)
 issuesRouter.get('/', [isReporter], getIssues)
 issuesRouter.put('/:id', [isAuth], putIssues)
 issuesRouter.post('/', [isReporter], postIssues)

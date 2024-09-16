@@ -76,7 +76,7 @@ const deleteIssues = async (req, res, next) => {
 const getIssueByReporter = async (req, res, next) => {
   try {
     const { reporter } = req.params
-    const issues = await Issue.find({ reporter: reporter })
+    const issues = await Issue.find({ user: reporter })
     return res.status(200).json(issues)
   } catch (error) {
     return res.status(400).json({
