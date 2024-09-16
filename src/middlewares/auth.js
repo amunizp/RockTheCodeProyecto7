@@ -50,19 +50,18 @@ const isSelf = async (req, res, next) => {
   try {
     console.log('checking if you are deleting yourself')
     isReporter
-    console.log(isReporter)
-    console.log(isAuth)
     console.log(
       'looks like you are a reporter, now lets check if you are deleting yourself'
     )
     const token = req.headers.authorization
     const parsedToken = token.split(' ').pop()
-    const { id, admin } = verifySignature(parsedToken)
+    const { id } = verifySignature(parsedToken)
     console.log('on the url', req.params.id)
     console.log('from your token', id)
-    console.log('are you admin?', admin)
+    const reporter = await Reporter.findById(id)
+    console.log('are you admin?', reporter.admin)
 
-    if (req.params.id === id || admin) {
+    if (req.params.id === id || reporter.admin) {
       console.log('eres el mismo usuario o eres admin')
       next()
     } else {
