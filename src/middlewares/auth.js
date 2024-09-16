@@ -57,12 +57,13 @@ const isSelf = async (req, res, next) => {
     )
     const token = req.headers.authorization
     const parsedToken = token.split(' ').pop()
-    const { id } = verifySignature(parsedToken)
+    const { id, admin } = verifySignature(parsedToken)
     console.log('on the url', req.params.id)
     console.log('from your token', id)
+    console.log('are you admin?', admin)
 
-    if (req.params.id === id) {
-      console.log('eres el mismo usuario')
+    if (req.params.id === id || admin) {
+      console.log('eres el mismo usuario o eres admin')
       next()
     } else {
       return res.status(400).json({
@@ -80,5 +81,5 @@ const isSelf = async (req, res, next) => {
   }
 }
 
-const authChain = [isSelf, isAuth]
+const authChain = [isSelf, isAuth] //not needed but would be interested in knowing how to make it work simply.
 module.exports = { isAuth, isReporter, isSelf, authChain }

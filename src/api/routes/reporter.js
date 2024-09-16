@@ -19,6 +19,6 @@ reportersRouter.get('/', [isAuth], getReporters)
 reportersRouter.put('/:id', [isAuth], putReporters)
 reportersRouter.post('/register', registerReporters)
 reportersRouter.post('/login', loginReporter)
-reportersRouter.delete('/:id', [authChain], deleteReporters)
+reportersRouter.delete('/:id', [isSelf], deleteReporters)
 
 module.exports = reportersRouter
